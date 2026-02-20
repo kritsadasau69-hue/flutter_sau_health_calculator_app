@@ -1,59 +1,66 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter_sau_health_calculator_app/views/home_ui.dart';
 
-class HomeUi extends StatefulWidget {
-  const HomeUi({super.key});
+class SplashScreenUi extends StatefulWidget {
+  const SplashScreenUi({super.key});
 
   @override
-  State<HomeUi> createState() => _HomeUiState();
+  State<SplashScreenUi> createState() => _SplashScreenUiState();
 }
 
-class _HomeUiState extends State<HomeUi> {
-  //ตัวแปรเก็บ Index ที่เลือก
-  int selectIndexItem = 1;
+class _SplashScreenUiState extends State<SplashScreenUi> {
+  @override
+  void initState() {
+    // โค้ดหน่วงเวลาหน้าจอ พอครบกำหนดเวลาให้ทำอะไรก็ได้แล้วต้องการ
+    Future.delayed(
+      //หน่วงเวลาไว้ 3 วิ
+      Duration(seconds: 3),
+      //พอครบเวลาให้เปิดไปหน้าจอ HomeUi แบบย้อนกลับไม่ได้
+      () {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => HomeUi(),
+          ),
+        );
+      },
+    );
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.deepOrange,
-        title: Text(
-          'Body Health Calcutor',
-          style: TextStyle(
-            color: Colors.white,
-          ),
+      backgroundColor: Colors.deepOrange,
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              'assets/images/calculator.png',
+              width: 200.0,
+              height: 200.0,
+              fit: BoxFit.cover,
+            ),
+            SizedBox(
+              height: 30.0,
+            ),
+            Text(
+              'Body Health Calculator',
+              style: TextStyle(
+                fontSize: 26.0,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            ),
+            CircularProgressIndicator(
+              color: Colors.white,
+            ),
+            SizedBox(
+              height: 30.0,
+            ),
+          ],
         ),
-        centerTitle: true,
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        onTap: (paramValue) {
-          setState(() {
-            selectIndexItem = paramValue;
-          });
-        },
-        currentIndex: selectIndexItem,
-        selectedItemColor: Colors.deepOrange,
-        unselectedItemColor: Colors.deepOrangeAccent[100],
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.person,
-            ),
-            label: 'BMI',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.home,
-            ),
-            label: 'About',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              FontAwesomeIcons.heartCircleBolt,
-            ),
-            label: 'BMR',
-          ),
-        ],
       ),
     );
   }

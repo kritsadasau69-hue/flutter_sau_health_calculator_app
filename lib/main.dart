@@ -1,36 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_sau_health_calculator_app/views/splash_screen_ui.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-class SplashScreenUi extends StatefulWidget {
-  const SplashScreenUi({super.key});
-
-  @override
-  State<SplashScreenUi> createState() => _SplashScreenUiState();
+//--------------------------------------------
+void main() {
+  runApp(
+    FlutterSauHealthCalculatorApp(),
+  );
 }
 
-class _SplashScreenUiState extends State<SplashScreenUi> {
+//---------------------------------------------
+class FlutterSauHealthCalculatorApp extends StatefulWidget {
+  const FlutterSauHealthCalculatorApp({super.key});
+
+  @override
+  State<FlutterSauHealthCalculatorApp> createState() =>
+      _FlutterSauHealthCalculatorAppState();
+}
+
+class _FlutterSauHealthCalculatorAppState
+    extends State<FlutterSauHealthCalculatorApp> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.deepOrange,
-      body: Center(
-        child: Column(
-          children: [
-            Image.asset(
-              'assets/images/logo.png',
-              width: 200.0,
-              height: 200.0,
-              fit: BoxFit.cover,
-            ),
-            Text(
-              'Body Health Calculator',
-              style: TextStyle(
-                fontSize: 26.0,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
-            ),
-          ],
-        ),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: SplashScreenUi(),
+      theme: ThemeData(
+        textTheme: GoogleFonts.kanitTextTheme(
+            //textTheme: GoogleFonts.promptTextTheme(
+            //textTheme: GoogleFonts.notoSansThaiTextTheme(
+            Theme.of(context).textTheme),
       ),
     );
   }
